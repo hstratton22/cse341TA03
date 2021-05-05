@@ -1,9 +1,26 @@
-const url = "https://byui-cse.github.io/cse341-course/lesson03/items.json";
+console.log("/controllers/wk3/inside index.js")
+/*const url = "https://byui-cse.github.io/cse341-course/lesson03/items.json";
+const fetch = require('node-fetch');
 
 exports.processJson = (req, res, next) => {
-    getJSON; //?
+    
 
-}
+fetch(url)
+.then(function(response) {
+    return response.json();
+})
+.then(function (jsonObject) {
+    //console.log(jsonObject);
+
+    const items = jsonObject;
+    /*for (let i = 0; i < items.length; i++){
+        console.log(items[i]);
+    }*/
+ //   return parseJSON(items);
+//})
+    //getJSON; //?
+
+//}
     /*fetch(url)
     .then(res  => res.json())
     .then(out) => {
@@ -23,6 +40,7 @@ exports.processJson = (req, res, next) => {
 }).catch(err => console.error(err));
 ?
 */
+/*
 const getJSON = (cb) => {
     fetch(url, (err, data) => {
         //console.log(fileContent);
@@ -35,4 +53,4 @@ const getJSON = (cb) => {
             cb(JSON.parse(data));
         }
     });
-};
+};*/
