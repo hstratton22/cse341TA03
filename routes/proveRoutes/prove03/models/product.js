@@ -9,7 +9,7 @@ const p = path.join(
     'proveRoutes',
     'prove03',
     'data', 
-    'products.json'
+    'newProducts.json'
 );  
 const getProductsFromFile = (cb) => {
     fs.readFile(p, (err, fileContent) => {
