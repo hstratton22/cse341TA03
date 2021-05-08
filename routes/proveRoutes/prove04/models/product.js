@@ -1,4 +1,31 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const productSchema = new Schema({
+  title:{
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required:true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  imageUrl: {
+    type: String, 
+    required:true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required:true
+  }
+});
+module.exports = mongoose.model('Product', productSchema);
 //const products = [];
+/*
 const fs = require('fs');
 const path = require('path');
 const Cart = require('./cart');
@@ -67,7 +94,7 @@ module.exports = class Product {
 
         //console.log(fileContent);
         // });
-   
+   /*
     static deleteById(id) {
         getProductsFromFile(products => {
             const product = products.find(prod => prod.id === id);
@@ -90,4 +117,4 @@ module.exports = class Product {
             cb(product);
         });
     }
-};
+};*/
