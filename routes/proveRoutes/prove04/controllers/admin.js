@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
-    res.render('pages/proveAssignments/prove03/admin/edit-product', {
+    res.render('pages/proveAssignments/prove04/admin/edit-product', {
         pageTitle: "Add Product",
         path: '/admin/add-product',
         editing: false
@@ -29,7 +29,7 @@ exports.getEditProduct = (req, res, next) => {
         if (!product) {
             return res.redirect('products');
         }
-        res.render('pages/proveAssignments/prove03/admin/edit-product', {
+        res.render('pages/proveAssignments/prove04/admin/edit-product', {
             pageTitle: "Edit Product",
             path: '/admin/edit-product',
             editing: editMode,
@@ -53,13 +53,13 @@ exports.postEditProduct = (req, res, next) => {
         updatedPrice
     );
     updatedProduct.save();
-    res.redirect('products');//pages/proveAssignments/prove03/admin/
+    res.redirect('products');
 
 };
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll(products => {
-        res.render('pages/proveAssignments/prove03/admin/products', {
+        res.render('pages/proveAssignments/prove04/admin/products', {
             prods: products,
             pageTitle: 'Admin Products',
             path: '/admin/products'
@@ -71,5 +71,5 @@ exports.getProducts = (req, res, next) => {
 exports.postDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
     Product.deleteById(prodId);
-    res.redirect('products');//pages/proveAssignments/prove03/admin/products
+    res.redirect('products');
 }
