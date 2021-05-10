@@ -15,8 +15,8 @@ exports.getProducts = (req, res, next) => {
     .catch(err => {
         console.log(err);
     });
-};
-
+}; 
+ 
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
     Product.findById(prodId)
@@ -30,7 +30,7 @@ exports.getProduct = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
-
+ 
 exports.getIndex = (req, res, next) => {
     Product.find()
     .then(products => {
@@ -55,7 +55,7 @@ exports.getCart = (req, res, next) => {
             res.render('pages/proveAssignments/prove04/shop/cart', {
                 path: '/cart',
                 pageTitle: 'Your cart',
-                products: cartProducts
+                products: products
             });
     })
     .catch(err => console.log(err));
@@ -82,7 +82,7 @@ exports.postCartDeleteProduct = (req, res, next) => {
     req.user
     .removeFromCart(prodId)
     .then(result => {
-        res.redirect('/proveAssignments/prove04/cart');//pages/
+        res.redirect('/proveAssignments/prove04/cart');//pages/  need shop?
     })
     .catch(err => console.log(err));
 };
@@ -109,24 +109,24 @@ exports.postOrder = (req, res, next) => {
         return req.user.clearCart();
       })
       .then(() => {
-        res.redirect('/orders');//check path
+        res.redirect('orders');//check path ?proveAssignments/prove04/shop/orders
       })
       .catch(err => console.log(err));
-  };
+  }; 
 
 
 exports.getOrders = (req, res, next) => {
     Order.find({ 'user.userId': req.user._id })
     .then(orders => {
-    res.render('pages/proveAssignments/prove04/shop/orders', {
+    res.render('pages/proveAssignments/prove04/shop/orders', {//pages  //pages/proveAssignments/prove04/shop/ or shop/orders
         path: '/orders',
         pageTitle: 'Your Orders',
-        orders:orders
+        orders: orders
     });
 })
 .catch(err => console.log(err));
 
-};
+}; 
     //const products = Product.fetchAll();
     //console.log('another in the middleware');
     //res.send('<h1>Hello from Express!</h1>');
