@@ -9,13 +9,18 @@ const routes = require('./routes');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
 const User = require('./routes/proveRoutes/prove04/models/user');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const corsOptions = {
+  origin: "https://ta03-cse341.herokuapp.com/",
+  optionsSuccessStatus: 200
+};
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
-   .set('views', path.join(__dirname, 'views'))
-   .set('view engine', 'ejs')
-   .use((req, res, next) => {
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .use((req, res, next) => {
     User.findById('609583ea3f161a723a332044')//("60947956b893eb8bf3e04661")
       .then(user => {
         req.user = user;
@@ -23,13 +28,25 @@ app.use(express.static(path.join(__dirname, 'public')))
       })
       .catch(err => console.log(err));
   })
-   .use('/', routes);
+  .use(cors(corsOptions))
+  .use('/', routes);
+
+  const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    family: 4
+};
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://heatherS:rzdW8iGaPSvM35rv@cluster0.3uz0q.mongodb.net/shop?retryWrites=true&w=majority";
 
 mongoose
-  .connect('mongodb+srv://heatherS:rzdW8iGaPSvM35rv@cluster0.3uz0q.mongodb.net/shop?retryWrites=true&w=majority')
+  .connect(//('mongodb+srv://heatherS:rzdW8iGaPSvM35rv@cluster0.3uz0q.mongodb.net/shop?retryWrites=true&w=majority')
+  MONGODB_URL, options
+  )
   .then(result => {
-    User.findOne().then(user =>{
-      if (!user){
+    User.findOne().then(user => {
+      if (!user) {
         const user = new User({
           name: 'me',
           email: 'me@me.com',
@@ -40,7 +57,7 @@ mongoose
         user.save();
       }
     });
-    
+
     app.listen(PORT);
   })
   .catch(err => {
@@ -51,8 +68,8 @@ mongoose
 // Route setup. You can implement more in the future!
 const ta01Routes = require('./routes/ta01');
 const ta02Routes = require('./routes/ta02');
-const ta03Routes = require('./routes/ta03'); 
-const ta04Routes = require('./routes/ta04'); 
+const ta03Routes = require('./routes/ta03');
+const ta04Routes = require('./routes/ta04');
 const prove01Routes = require('./routes/prove01');
 */
 
@@ -63,22 +80,22 @@ const prove01Routes = require('./routes/prove01');
    //.set('view engine', 'hbs')
    //?may need again
    //.use(bodyParser({extended: false})) // For parsing the body of a POST
-   
-   /*
-   .use('/ta01', ta01Routes)
-   .use('/ta02', ta02Routes) 
-   .use('/ta03', ta03Routes) 
-   .use('/ta04', ta04Routes)
-   .use('/prove01', prove01Routes)
-   .get('/', (req, res, next) => {
-     // This is the primary index, always handled last. 
-     res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
-    })
-   .use((req, res, next) => {
-     // 404 page
-     res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
-   })*/
-   
+
+/*
+.use('/ta01', ta01Routes)
+.use('/ta02', ta02Routes)
+.use('/ta03', ta03Routes)
+.use('/ta04', ta04Routes)
+.use('/prove01', prove01Routes)
+.get('/', (req, res, next) => {
+  // This is the primary index, always handled last.
+  res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
+ })
+.use((req, res, next) => {
+  // 404 page
+  res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
+})*/
+
 
 /* previously working code
 //https://github.com/hstratton22/cse341TA03
@@ -101,8 +118,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Route setup. You can implement more in the future!
 const ta01Routes = require('./routes/ta01');
 const ta02Routes = require('./routes/ta02');
-const ta03Routes = require('./routes/ta03'); 
-const ta04Routes = require('./routes/ta04'); 
+const ta03Routes = require('./routes/ta03');
+const ta04Routes = require('./routes/ta04');
 const prove01Routes = require('./routes/prove01');
 */
 
@@ -113,19 +130,19 @@ const prove01Routes = require('./routes/prove01');
    //.set('view engine', 'hbs')
    //?may need again
    //.use(bodyParser({extended: false})) // For parsing the body of a POST
-   
-   /*
-   .use('/ta01', ta01Routes)
-   .use('/ta02', ta02Routes) 
-   .use('/ta03', ta03Routes) 
-   .use('/ta04', ta04Routes)
-   .use('/prove01', prove01Routes)
-   .get('/', (req, res, next) => {
-     // This is the primary index, always handled last. 
-     res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
-    })
-   .use((req, res, next) => {
-     // 404 page
-     res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
-   })*/
-   
+
+/*
+.use('/ta01', ta01Routes)
+.use('/ta02', ta02Routes)
+.use('/ta03', ta03Routes)
+.use('/ta04', ta04Routes)
+.use('/prove01', prove01Routes)
+.get('/', (req, res, next) => {
+  // This is the primary index, always handled last.
+  res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
+ })
+.use((req, res, next) => {
+  // 404 page
+  res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
+})*/
+
