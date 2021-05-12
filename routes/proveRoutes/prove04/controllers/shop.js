@@ -5,7 +5,7 @@ const Order = require('../models/order');
 exports.getProducts = (req, res, next) => {
     Product.find()
     .then(products => {
-        console.log(products);
+        //console.log(products);
         res.render('pages/proveAssignments/prove04/shop/product-list', {
             prods: products,
             pageTitle: 'All Products',
@@ -50,7 +50,7 @@ exports.getCart = (req, res, next) => {
     .populate('cart.items.productId')
     .execPopulate()
     .then(user => {
-      //console.log(user.cart.items);
+      console.log(user.cart.items);
       const products = user.cart.items;
             res.render('pages/proveAssignments/prove04/shop/cart', {
                 path: '/cart',
