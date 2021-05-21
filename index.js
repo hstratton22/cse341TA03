@@ -1,4 +1,5 @@
 //attempt to add mongoose
+//https://ta03-cse341.herokuapp.com/ 
 //https://github.com/hstratton22/cse341TA03
 // Our initial setup (package requires, port number setup)
 const express = require('express');
@@ -11,11 +12,12 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cors = require('cors');
+const PRIVATE = require('./private');
 const corsOptions = {
   origin: "https://ta03-cse341.herokuapp.com/",
   optionsSuccessStatus: 200
 };
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://heatherS:rzdW8iGaPSvM35rv@cluster0.3uz0q.mongodb.net/shop?retryWrites=true&w=majority";
+const MONGODB_URL = process.env.MONGODB_URL || PRIVATE.dbURL; 
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URL,
@@ -64,7 +66,7 @@ const options = {
 
 
 mongoose
-  .connect(//('mongodb+srv://heatherS:rzdW8iGaPSvM35rv@cluster0.3uz0q.mongodb.net/shop?retryWrites=true&w=majority')
+  .connect(
     MONGODB_URL, options
   )
   .then(result => {
@@ -82,6 +84,7 @@ mongoose
     // });
 
     app.listen(PORT);
+    //console.log(PRIVATE.dbURL);
   })
   .catch(err => {
     console.log(err);
