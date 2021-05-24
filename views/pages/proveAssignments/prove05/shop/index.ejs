@@ -7,10 +7,11 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
+        <h1 class = "centered">Choose from our selection</h1>
         <% if (prods.length > 0 ) { %>
-        <div class="grid">
+        <div class="grid-scroll">
             <% for (let product of prods) { %>
-                <article class="card product-item">
+                <article class="card product-item product-item-scroll">
                     <header class="card__header">
                         <h1 class="product__title"><%= product.title %></h1>
                     </header>
