@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator/check')
 const User = require('../models/user');
-const PRIVATE = require('../../../../private');
+//const PRIVATE = require('../../../../private');
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
         api_key: process.env.API_KEY || PRIVATE.API_KEY
