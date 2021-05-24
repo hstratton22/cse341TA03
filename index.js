@@ -11,6 +11,8 @@ const User = require('./routes/proveRoutes/prove05/models/user');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+//const csrf = require('csurf');
+//const flash = require('connect-flash');
 const cors = require('cors');
 const PRIVATE = require('./private');
 const corsOptions = {
@@ -23,7 +25,7 @@ const store = new MongoDBStore({
   uri: MONGODB_URL,
   collection: 'sessions'
 });
-
+//const csrfProtection  = csrf();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(
@@ -34,21 +36,38 @@ app.use(
     store: store
   })
 );
+//app.use(csrfProtection);//not here?
+//app.use(flash());//not here?
 
+// app.use((req, res, next) => {
+//   res.locals.isAuthenticated = req.session.isLoggedIn;
+//   res.locals.csrfToken = req.csrfToken();
+//   next();
+// });
 
-
-app
-  .use((req, res, next) => {
-    if (!req.session.user) {
-      return next();
-    }
-    User.findById(req.session.user._id)//('609583ea3f161a723a332044')//("60947956b893eb8bf3e04661")
-      .then(user => {
-        req.user = user; //new User(user.name, user.email, user.cart, user._id);
-        next();
-      })
-      .catch(err => console.log(err));
-  });
+//to other index.js?
+// app
+//   .use((req, res, next) => {
+//     //throw new Error('Sync Dummy');
+//     if (!req.session.user) {
+//       return next();
+//     }
+//     User.findById(req.session.user._id)//('609583ea3f161a723a332044')//("60947956b893eb8bf3e04661")
+//       .then(user => {
+//         //throw new Error('Dummy!);
+//         if (!user) {
+//           return next();
+//         }
+//         req.user = user; //new User(user.name, user.email, user.cart, user._id);
+//         next();
+//       })
+//       .catch(err => {
+//         //console.log(err))
+//       //next();
+//       //throw new Error(err);
+//       next(new Error(err));
+//       });
+//   });
 
 app
   .set('views', path.join(__dirname, 'views'))

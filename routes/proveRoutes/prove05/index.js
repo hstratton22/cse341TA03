@@ -5,6 +5,7 @@ const errorController = require('./controllers/error');
 const router = express.Router();
 const path = require('path');
 const mongoose = require('mongoose');
+const session = require('express-session');
 const User = require('./models/user');
 const csrf = require('csurf');
 const flash = require('connect-flash');
@@ -21,6 +22,30 @@ router
   .use(express.static(path.join(__dirname, 'public',)))
   .use(csrfProtection)//here or main index.js?
   .use(flash())//here or main index.js?
+  
+  .use((req, res, next) => {
+    //throw new Error('Sync Dummy');
+    if (!req.session.user) {
+      return next();
+    }
+    User.findById(req.session.user._id)//('609583ea3f161a723a332044')//("60947956b893eb8bf3e04661")
+      .then(user => {
+        //throw new Error('Dummy!);
+        if (!user) {
+          return next();
+        }
+        req.user = user; //new User(user.name, user.email, user.cart, user._id);
+        next();
+      })
+      .catch(err => {
+        //console.log(err))
+      //next();
+      //throw new Error(err);
+      next(new Error(err));
+      });
+  });
+
+
   // .use((req, res, next) => {
   //   User.findById('609583ea3f161a723a332044')//("60947956b893eb8bf3e04661")
   //     .then(user => {
@@ -37,7 +62,18 @@ router.use((req, res, next) => {
 router.use('/admin', adminRoutes)
   .use(shopRoutes)
   .use(authRoutes)
-  .use(errorController.get404);
+
+  router.get('/500', errorController.get500)//get?
+  .use(errorController.get404)
+  .use((err, req, res, next) => {
+    //res.status(error.httpStatusCode).render(...);
+    //res.redirect('/500');
+    res.status(500).render('pages/proveRoutes/prove05/500', { 
+      pageTitle: 'Error Occurred', 
+      path: '/500',
+      isAuthenticated :  req.session.isLoggedIn 
+    });
+  });
 
 
 /*router.get('/', (req, res, next) => {
