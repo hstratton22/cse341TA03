@@ -31,10 +31,11 @@
     
 }
 /*or remove this and leave uncomment .card__image img*/
+/***for index.ejs, products.ejs, product-list.ejs***/
 .card__image {
     overflow:hidden;
     max-width: 20rem; /*100%;*/
-    max-height: 200px;
+    max-height: 200px;/*max-*/
 }
 .card__image img {
     /*max-width: 100%;
