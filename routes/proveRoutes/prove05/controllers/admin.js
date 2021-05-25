@@ -8,7 +8,7 @@ exports.getAddProduct = (req, res, next) => {
     return res.redirect('/login');
   }*/
     res.render('pages/proveAssignments/prove05/admin/edit-product', {
-        pageTitle: 'Add Product',
+        pageTitle: 'Admin Add Product',
         path: '/admin/add-product',
         editing: false,
         hasError: false,
@@ -29,7 +29,7 @@ exports.postAddProduct = (req, res, next) => {
     if (!errors.isEmpty()) {
         console.log(errors.array());
         return res.status(422).render('pages/proveAssignments/prove05/admin/edit-product', {
-            pageTitle: 'Add Product',
+            pageTitle: 'Admin Add Product',
             path: '/admin/edit-product',
             editing: false,
             hasError: true,
@@ -97,7 +97,7 @@ exports.getEditProduct = (req, res, next) => {
                 return res.redirect('products');
             }
             res.render('pages/proveAssignments/prove05/admin/edit-product', {
-                pageTitle: "Edit Product",
+                pageTitle: "Admin Edit Product",
                 path: '/admin/edit-product',
                 editing: editMode,
                 product: product,
@@ -126,7 +126,7 @@ exports.postEditProduct = (req, res, next) => {
     if (!errors.isEmpty()) {
         console.log(errors.array());
         return res.status(422).render('pages/proveAssignments/prove05/admin/edit-product', {
-            pageTitle: 'Edit Product',
+            pageTitle: 'Admin Edit Product',
             path: '/admin/edit-product',
             editing: true,
             hasError: true,
