@@ -2,6 +2,8 @@
 //https://ta03-cse341.herokuapp.com/ 
 //https://github.com/hstratton22/cse341TA03
 // Our initial setup (package requires, port number setup)
+require('dotenv').config({ encoding: 'UTF-8' })
+require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
