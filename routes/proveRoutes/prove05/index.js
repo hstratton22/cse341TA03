@@ -12,6 +12,7 @@ const flash = require('connect-flash');
 //const User = require('../prove04/models/user');
 
 router.use(bodyParser.urlencoded({ extended: false }));
+//router.use('/favicon.ico', express.static('images/favicon.ico'));
 const adminRoutes = require('./routes/admin');
 //const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -20,6 +21,7 @@ const csrfProtection = csrf();
 router
   //.use(express.static(path.join(__dirname, 'public', 'provePublic', 'prove03', 'public')))
   .use(express.static(path.join(__dirname, 'public',)))
+  .use('/favicon.ico', express.static('images/favicon.ico'))
   .use(csrfProtection)//here or main index.js?
   .use(flash())//here or main index.js?
   
