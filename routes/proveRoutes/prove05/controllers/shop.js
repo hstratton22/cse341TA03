@@ -41,7 +41,7 @@ exports.getIndex = (req, res, next) => {
         .then(products => {
             res.render('pages/proveAssignments/prove05/shop/index', {
                 prods: products,
-                pageTitle: 'Shop Home',
+                pageTitle: 'E-commerce tutorial Shop Home ',
                 path: '/',
                 ///isAuthenticated: req.session.isLoggedIn//req.isLoggedIn
             });
