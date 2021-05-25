@@ -64,7 +64,7 @@ exports.getSignup = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
     //req.session.isLoggedIn = true;
-    //res.setHeader('Set-Cookie', 'loggedIn=true; HttpOnly');
+    //res.setHeader('Set-Cookie', 'loggedIn=true; HttpOnly, Secure');
     //req.isLoggedIn = true;
     const email = req.body.email;
     const password = req.body.password;

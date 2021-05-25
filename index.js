@@ -32,12 +32,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(
   session({
-    secret: 'my secret',
+    secret: 's3Cur3',
     resave: false,
     saveUninitialized: false,
     store: store
   })
-);
+);//secret: 'my secret'
+//, cookie: {maxAge: date, expires: date}
 //app.use(csrfProtection);//not here?
 //app.use(flash());//not here?
 
@@ -70,7 +71,7 @@ app.use(
 //       next(new Error(err));
 //       });
 //   });
-
+app.disable('x-powered-by');//good or bad?
 app
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')

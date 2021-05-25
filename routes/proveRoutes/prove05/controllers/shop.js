@@ -33,7 +33,12 @@ exports.getProduct = (req, res, next) => {
                 //isAuthenticated: req.session.isLoggedIn//req.isLoggedIn
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => //console.log(err));
+        {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
 };
 
 exports.getIndex = (req, res, next) => {

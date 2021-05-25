@@ -25,7 +25,12 @@ router
   .use(csrfProtection)//here or main index.js?
   .use(flash())//here or main index.js?
   
-  .use((req, res, next) => {
+  router.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
+  });
+  router.use((req, res, next) => {
     //throw new Error('Sync Dummy');
     if (!req.session.user) {
       return next();
@@ -56,11 +61,11 @@ router
   //     })
   //     .catch(err => console.log(err));
   // })
-router.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isLoggedIn;
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});
+// router.use((req, res, next) => {
+//   res.locals.isAuthenticated = req.session.isLoggedIn;
+//   res.locals.csrfToken = req.csrfToken();
+//   next();
+// });
 router.use('/admin', adminRoutes)
   .use(shopRoutes)
   .use(authRoutes)
@@ -70,7 +75,7 @@ router.use('/admin', adminRoutes)
   .use((err, req, res, next) => {
     //res.status(error.httpStatusCode).render(...);
     //res.redirect('/500');
-    res.status(500).render('pages/proveRoutes/prove05/500', { 
+    res.status(500).render('pages/proveAssignments/prove05/500', { 
       pageTitle: 'Error Occurred', 
       path: '/500',
       isAuthenticated :  req.session.isLoggedIn 
