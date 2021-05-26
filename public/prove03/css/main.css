@@ -282,7 +282,7 @@ footer {
 .logo a{
   font-family: fantasy;
   font-size: 1.25rem;;
-  color:#05692E;;/*#12B554;*/
+  color:#05692E;/*#12B554;*/
   background-color: white;
   padding-left:.25rem;
   padding-right:.25rem;
@@ -291,7 +291,14 @@ footer {
   font-weight: bold;
 }
 .logo a:hover {
-  color:#690052
+  color:#690052;
+}
+.green a{
+  color:#05692E;
+  text-decoration: none;
+}
+.green a:hover{
+  color:#690052;
 }
 
 @media (min-width: 768px) {
