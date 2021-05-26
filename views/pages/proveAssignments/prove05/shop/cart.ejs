@@ -12,12 +12,28 @@
                                 <h2>
                                     <%= p.productId.title %>
                                 </h2>
+                                <div class="cart-quantity">
                                 <h3>Quantity: <%= p.quantity %>
                                 </h3>
+                
+                                <form action="cart-counter" method="POST">
+                                    <input type="hidden" name="constant" value="1">
+                                    <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="btn btn-counter">+</button>
+                                </form>
+                                <form action="cart-counter" method="POST">
+                                    <input type="hidden" name="constant" value="-1">
+                                    <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="btn btn-counter">-</button>
+                                </form>
+                            
+                            </div>
                                 <form action="cart-delete-item" method="POST">
                                     <input type="hidden" value="<%= p.productId._id %>" name="productId">
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                    <button class="btn danger" type="submit">Delete</button>
+                                    <button class="btn danger" type="submit">Remove</button>
                                 </form>
                             </li>
 

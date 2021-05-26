@@ -4,7 +4,7 @@ const userSchema = new Schema({
   name: {
     type: String
   },
-  
+
   email: {
     type: String,
     required: true
@@ -29,6 +29,7 @@ userSchema.methods.addToCart = function (product) {
   const cartProductIndex = this.cart.items.findIndex(cp => {
     return cp.productId.toString() === product._id.toString();
   });
+  //console.log(cartProductIndex);
   let newQuantity = 1;
   const updatedCartItems = [...this.cart.items];
 
@@ -47,7 +48,7 @@ userSchema.methods.addToCart = function (product) {
   this.cart = updatedCart;
   return this.save();
 }
-userSchema.methods.removeFromCart = function(productId){
+userSchema.methods.removeFromCart = function (productId) {
   const updatedCartItems = this.cart.items.filter(item => {
     return item.productId.toString() !== productId.toString();
   });
@@ -55,8 +56,39 @@ userSchema.methods.removeFromCart = function(productId){
   return this.save();
 };
 
-userSchema.methods.clearCart = function() {
-  this.cart = { items:[] };
+userSchema.methods.updateCartQuantity = function (product, counterChange) {
+  console.log("inside user updateCartQuantity")
+  console.log(counterChange);
+  console.log(product);
+  const cartProductIndex = this.cart.items.findIndex(cp => {
+    return cp.productId.toString() === product._id.toString();
+  });
+  console.log(cartProductIndex);
+  let newQuantity = 1;
+  const updatedCartItems = [...this.cart.items];
+  console.log(updatedCartItems);
+  console.log(cartProductIndex);
+  if (cartProductIndex >= 0) {
+    newQuantity = this.cart.items[cartProductIndex].quantity + counterChange;
+    updatedCartItems[cartProductIndex].quantity = newQuantity;
+    // if (updatedCartItems[cartProductIndex].quantity <= 0){
+    //   console.log("0 or less");
+    // }
+  } else {
+    updatedCartItems.push({
+      productId: product._id,
+      quantity: newQuantity
+    });
+  }
+  const updatedCart = {
+    items: updatedCartItems
+  };
+  this.cart = updatedCart;
+  return this.save();
+}
+
+userSchema.methods.clearCart = function () {
+  this.cart = { items: [] };
   return this.save();
 
 };

@@ -108,7 +108,12 @@ exports.postCartDeleteProduct = (req, res, next) => {
         .then(result => {
             res.redirect('/proveAssignments/prove05/cart');//pages/  need shop?
         })
-        .catch(err => console.log(err));
+        .catch(err => //console.log(err));
+        {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
 };
 exports.postOrder = (req, res, next) => {
     req.user//req.session.user//req.user
@@ -136,7 +141,8 @@ exports.postOrder = (req, res, next) => {
             res.redirect('orders');//check path ?proveAssignments/prove04/shop/orders
         })
         .catch(err => //console.log(err));
-        {const error = new Error(err);
+        {
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -161,6 +167,29 @@ exports.getOrders = (req, res, next) => {
         });
 
 };
+exports.postCounter = (req, res, next) => {
+    const prodId = req.body.productId;
+    const counterChange = Number(req.body.constant);
+    console.log(prodId, counterChange);
+    Product.findById(prodId)
+        .then(product => {
+            return req.user.updateCartQuantity(product, counterChange);
+        })
+    // req.user
+    //     .updateCartQuantity(prodId, counterChange)
+        .then(result => {
+            res.redirect('./cart');
+        })
+        .catch(err => //console.log(err));
+        {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
+
+
+
+}
     //const products = Product.fetchAll();
     //console.log('another in the middleware');
     //res.send('<h1>Hello from Express!</h1>');
