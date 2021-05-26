@@ -10,10 +10,10 @@
         <% if (errorMessage) { %>
             <div class ="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
-        <form class="login-form" action="/proveAssignments/prove05/signup" method="POST" novalidate>
+        <form class="login-form" action="/proveAssignments/prove05/signup" method="POST">
             <div class="form-control">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="<%= oldInput.name %>">
             </div>
             <div class="form-control">
                 <label for="email">E-Mail</label>
@@ -29,6 +29,7 @@
                 <input 
                 class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
                 type="password" 
+                placeholder= "Only numbers/letters, min 4 char"
                 name="password" 
                 id="password" 
                 value="<%= oldInput.password %>">

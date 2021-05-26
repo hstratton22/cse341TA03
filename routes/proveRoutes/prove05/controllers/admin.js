@@ -1,6 +1,6 @@
 //const mongodb = require('mongodb');
 const Product = require('../models/product');
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');// /check
 //const ObjectId = mongodb.ObjectId;
 
 exports.getAddProduct = (req, res, next) => {

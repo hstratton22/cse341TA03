@@ -12,6 +12,8 @@ main {
   padding: 1rem;
   margin: auto;
   
+  /*background-image: linear-gradient(white, yellow);/*(rgba(255, 255, 0, .8)));*/
+  
 }
 .centered {
 text-align: center;
@@ -176,9 +178,15 @@ display: none;
 .grid-scroll {
   overflow:auto;
   white-space: nowrap;
+  border-top:2px solid #690052 ;
+  border-bottom:2px solid #690052 ;
 }
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background-color:rgba(255, 255, 0, .2) ;
+}
+.welcome {
+  color: #690052 ;
 }
 
 .card__header,
