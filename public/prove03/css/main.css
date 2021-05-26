@@ -279,10 +279,10 @@ footer {
 
   
 }
-.footer a{
+.logo a{
   font-family: fantasy;
   font-size: 1.25rem;;
-  color:#12B554;
+  color:#05692E;;/*#12B554;*/
   background-color: white;
   padding-left:.25rem;
   padding-right:.25rem;
@@ -290,7 +290,7 @@ footer {
   text-decoration: none;
   font-weight: bold;
 }
-.footer a:hover {
+.logo a:hover {
   color:#690052
 }
 
