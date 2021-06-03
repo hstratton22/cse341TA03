@@ -222,28 +222,28 @@ exports.postReset = (req, res, next) => {
     crypto.randomBytes(32, (err, buffer) => {
         if (err) {
             console.log(err);
-            return res.redirect('/reset');
+            return res.redirect('reset');
         }
         const token = buffer.toString('hex');
         User.findOne({ email: req.body.email })
             .then(user => {
                 if (!user) {
                     req.flash('error', 'No account with that email found.');
-                    return res.redirect('/reset');
+                    return res.redirect('reset');
                 }
                 user.resetToken = token;
                 user.resetTokenExpiration = Date.now() + 3600000;
                 return user.save();
             })
             .then(result => {
-                res.redirect('/');
+                res.redirect('login');// /  grr I don't know what this should be   
                 transporter.sendMail({
                     to: req.body.email,
                     from: 'str19023@byui.edu',
                     subject: 'Password Reset',
                     html: `<p>You requested a password reset</p>
             <p>Click this <a href=
-            "http://localhost:5000/reset/${token}">link</a> to set a new password.</p>
+            "http://localhost:5000/proveAssignments/prove05/reset/${token}">link</a> to set a new password.</p>
             `
                     //change this address to what?
                 });
