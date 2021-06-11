@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');///pokemon/1//lockdown to specific domains 'codepen.io'
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH ');//,DELETE
     res.setHeader('Acces-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
