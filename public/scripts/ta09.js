@@ -19,10 +19,7 @@ const populateList = url => {
     data.then(json => {
         for (const i in json.results) {
             pokeList.innerHTML += `<li>${json.results[i].name}</li>`
-            // let div = document.createElement('div');
-            // div.innerHTML = `<img src="${json.sprites.front_default }"/>`
-            // pokeList.appendChild(div);
-
+            
             next = json.next
             prev = json.previous
         }
