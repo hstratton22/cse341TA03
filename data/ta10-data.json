@@ -1,24 +1,24 @@
 {
     "avengers": [
         {
-            "name": "Tony Stark AKA Iron Man"
+            "name": "Tony Stark"
             
         },
         {
-            "name": "Steve Rogers AKA Captain America"
+            "name": "Steve Rogers"
             
         },
         {
-            "name": "Thor Odinson AKA Thor"
+            "name": "Thor Odinson"
         },
         {
-            "name": "Bruce Banner AKA The Hulk"
+            "name": "Bruce Banner"
         },
         {
-            "name": "Natasha Romanova AKA Black Widow"
+            "name": "Natasha Romanova"
         },
         {
-            "name": "Clint Barton AKA Hawkeye"
+            "name": "Clint Barton"
         }
     ]
 }

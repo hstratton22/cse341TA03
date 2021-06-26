@@ -110,3 +110,6 @@ a.white:hover {
   margin-top:.25rem;
   font-weight: bold;
 }
+.indent {
+  margin-left: .5rem;
+}
